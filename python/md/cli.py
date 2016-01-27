@@ -7,6 +7,7 @@ import sys
 from md.configuration import Configuration
 from md.command import Command
 from md.simulation import Simulation
+from simtk.openmm import Platform
 from htmdx.cli import *
 
 def syntax():
@@ -58,13 +59,14 @@ def main_cli():
 					device = int(sys.argv[a+1])
 					a=a+1
 				else:
-					raise NameError()
+					raise NameError( "--device  requires an argument" )
 			elif( sys.argv[a] == "--platform" ):
 				if(a<len(sys.argv)-1):
 					platform = sys.argv[a+1]
 					a=a+1
 				else:
-					raise NameError()
+					show_platforms()
+					sys.exit(0)
 			elif( sys.argv[a] == "--command" ):	
 				if a<len(sys.argv)-1:
 					Command.help( sys.argv[a+1] )
@@ -130,6 +132,9 @@ def main_cli():
 	sys.exit(0)
 
 
+def show_platforms():
+	for i in range(Platform.getNumPlatforms()):
+		print( Platform.getPlatform(i).getName() )
 
 def show_ffs():
 	import inspect
