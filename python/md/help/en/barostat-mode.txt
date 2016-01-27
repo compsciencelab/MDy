@@ -1,0 +1,4 @@
+iso      - Maintain box length ratios
+aniso    - Allow box lengths to vary independently
+membrane - Maintain X:Y ratio, allow Z to vary independently
+           In this mode, 'barostat-surface-tension' is active

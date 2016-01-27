@@ -1,0 +1,3 @@
+Initial velocity field for the simulation. File format 
+File format may be: PDB, COOR (NAMD binary)
+

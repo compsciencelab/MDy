@@ -1,0 +1,11 @@
+Linear dimensions of the unit cell.
+
+All simulations are in fully-periodic space and the unit cell must be cuboid.
+
+The unit cell dimensions are determined in the following order:
+ 1 restart file if restarting
+ 2 extendedsystem
+ 3 celldimension
+ 4 PDB CRYST if defined
+
+ACEMD will not attempt to automatically determine the  unit cell dimensions.

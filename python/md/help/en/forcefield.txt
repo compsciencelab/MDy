@@ -1,0 +1,12 @@
+Rules for configuring the forcefield used in the simulation.
+Each of these are mutually-exclusive:
+
+AMBER, with an ambertools-built system:
+   parmfile     : prmtop file from tleap
+
+CHARMM, with a Charmm/VMD-built system:
+   paramaters   : list of Charmm parameter files
+   structure    : PSF file
+
+Apply forcefield using OpenMM parameterisation:
+   forcefield   : list of OpenMM XML parameter files

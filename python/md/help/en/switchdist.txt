@@ -1,0 +1,5 @@
+A switching function will be applied to the VDW potential for
+switchdist <=r <= cutoff
+
+Set to 0 or cutoff value to disable switching
+ 

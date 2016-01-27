@@ -1,0 +1,2 @@
+Initial coordinates for the simulation. 
+File format may be: PDB, CRD, COOR (NAMD binary)

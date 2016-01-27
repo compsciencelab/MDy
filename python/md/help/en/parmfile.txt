@@ -1,0 +1,2 @@
+An Amber prmtop file.
+See 'forcefield' for rules.

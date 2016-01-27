@@ -1,0 +1,3 @@
+Set the surface tension applied to the system. 
+Requires 'barostat-mode' == 'membrane'
+

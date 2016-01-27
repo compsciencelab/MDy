@@ -1,0 +1,3 @@
+Set to cause the simulation to attempt to restart from the checkpoint file
+specified by 'restartfile'
+

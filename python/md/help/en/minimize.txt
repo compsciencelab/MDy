@@ -1,0 +1,2 @@
+Enable energy minimization of the system. Minimization will run until a
+low energy minimum is found.

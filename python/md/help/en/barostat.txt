@@ -1,0 +1,2 @@
+Enable pressure control to run the simulation in the NPE/NPT ensembles.
+See 'thermostat'

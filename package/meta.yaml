@@ -1,0 +1,28 @@
+package:
+  name: md
+  version: "0.0.1"
+
+source:
+   path: ..
+
+build:
+  entry_points:
+    - md     = md.cli:main_cli
+
+requirements:
+  build:
+    - python >=3.4
+
+  run:
+    - python >=3.4
+    - htmd
+    - openmm
+
+test:
+  commands:
+    - md  --help
+
+about:
+  home: http://www.htmd.org
+  license: "Acellera Academic License v1.1"
+  license_file: python/md/ACADEMIC_LICENCE.txt

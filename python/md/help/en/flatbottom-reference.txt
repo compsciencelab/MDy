@@ -1,0 +1,2 @@
+Atom selection in VMD selection grammar for the atoms that will be used to
+determine the reference position for the potential well.

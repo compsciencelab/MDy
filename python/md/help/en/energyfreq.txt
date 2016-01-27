@@ -1,0 +1,1 @@
+Interval between diagnostic output to the console

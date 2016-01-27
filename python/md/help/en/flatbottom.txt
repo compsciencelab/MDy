@@ -1,0 +1,14 @@
+Enable a flat-bottomed cuboid restraint potential.
+The atoms to be restrained are given by 'flatbottom-selection' and are 
+restrained within the axis-aligned cuboid box with linear extent
+specified by 'flatbottom-range'. 
+
+For example, to apply a restraint to the heavy atoms of a ligand
+to contain it within a 20A box centred around the geometric centre of
+the selection in the reference coordinate set:
+
+
+flatbottom           on
+flatbottom-file      structure.pdb
+flatbottom-target    "resname MOL and noh"
+flatbottom-range     20 20 20

@@ -1,0 +1,2 @@
+A CHARMM PSF file.
+See 'forcefield' for rules

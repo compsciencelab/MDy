@@ -1,0 +1,7 @@
+A PDB file containing reference coordinates. 
+If 'flatbottom' is enabled and 'flatbottom-file' is undefined, the value of
+'coordinates' will be used, and must be a PDB file.
+
+Used in conjunction with 'flatbottom-selection' to determine which atoms 
+will be subject to constraints.
+

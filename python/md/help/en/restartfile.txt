@@ -1,0 +1,1 @@
+Checkpoint data will be written to this file with the interval of 'trajfreq'

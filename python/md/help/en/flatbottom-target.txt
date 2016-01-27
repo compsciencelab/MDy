@@ -1,0 +1,2 @@
+Atom selection in VMD selection grammar for the atoms that will be subject 
+to the flat-bottomed restraint

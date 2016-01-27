@@ -1,0 +1,2 @@
+Initial temperature for the simulation.
+

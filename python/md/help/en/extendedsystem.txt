@@ -1,0 +1,1 @@
+A file containing the unit cell dimensions. See 'celldimension' for rules.

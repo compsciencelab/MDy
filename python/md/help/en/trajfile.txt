@@ -1,0 +1,2 @@
+The output trajectory file. Supports XTC and DCD formats. 
+Note: DCD cannot be used when restarting a simulation.

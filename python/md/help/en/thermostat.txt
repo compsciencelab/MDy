@@ -1,0 +1,3 @@
+Enable temperature control to run the simulation in the NPT/NVT ensembles.
+See 'barostat'
+

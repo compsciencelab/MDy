@@ -1,0 +1,6 @@
+The integration timestep for the simulation.
+
+If timestep > 1.0fs holonomic contraints are applied to all bonds
+If timestep > 2.5fs hydrogen masses are scaled to 4amu
+
+The simulation is unlikely to be stable above 4fs.

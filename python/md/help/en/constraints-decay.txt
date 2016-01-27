@@ -1,0 +1,3 @@
+The rate at which the constraints strength linearly decays to zero.
+
+k(t) = max( 0., k_0 - [constraints-decay] * time/ps )

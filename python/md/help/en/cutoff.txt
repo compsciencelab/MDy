@@ -1,0 +1,1 @@
+Cutoff distance for nonbonded interaction evaluation.
