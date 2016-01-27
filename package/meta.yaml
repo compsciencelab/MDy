@@ -1,13 +1,13 @@
 package:
-  name: md
-  version: "0.0.1"
+  name: mdy
+  version: "0.0.3"
 
 source:
    path: ..
 
 build:
   entry_points:
-    - md     = md.cli:main_cli
+    - mdy     = mdy.cli:main_cli
 
 requirements:
   build:
@@ -20,9 +20,9 @@ requirements:
 
 test:
   commands:
-    - md  --help
+    - mdy  --help
 
 about:
   home: http://www.htmd.org
   license: "Acellera Academic License v1.1"
-  license_file: python/md/ACADEMIC_LICENCE.txt
+  license_file: python/mdy/ACADEMIC_LICENCE.txt

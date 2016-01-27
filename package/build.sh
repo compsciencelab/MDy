@@ -6,7 +6,7 @@ if [ "$?" != "0" ]; then
 	exit 1
 fi
 
-PACKAGE=md
+PACKAGE=mdy
 
 find $PACKAGE -type d -name __pycache__ -exec rm -rf {} \; -print || true
 

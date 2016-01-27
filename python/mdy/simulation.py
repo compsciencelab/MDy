@@ -8,11 +8,11 @@ from simtk.unit import picoseconds
 from simtk.unit import picosecond
 from simtk.unit import femtoseconds
 from sys import stdout
-from md.bincoor import *
-from md.xsc import *
-from md.reporters import *
-import md.openmmfix.charmmparameterset
-import md.openmmfix.amberprmtopfile
+from mdy.bincoor import *
+from mdy.xsc import *
+from mdy.reporters import *
+import mdy.openmmfix.charmmparameterset
+import mdy.openmmfix.amberprmtopfile
 from natsort import natsorted
 from htmd.molecule.molecule import Molecule
 
@@ -379,7 +379,7 @@ class Simulation:
         )
 
     def setup_amber(self, config):
-        self.parameters = md.openmmfix.amberprmtopfile.AmberPrmtopFile(config.parmfile)
+        self.parameters = mdy.openmmfix.amberprmtopfile.AmberPrmtopFile(config.parmfile)
 
         self.system = self.parameters.createSystem(
             nonbondedMethod=self.nbmethod,
@@ -403,7 +403,7 @@ class Simulation:
             dim[2][2].value_in_unit(nanometer)
         )
 
-        self.parameters = md.openmmfix.charmmparameterset.CharmmParameterSet(*config.parameters, permissive=True)
+        self.parameters = mdy.openmmfix.charmmparameterset.CharmmParameterSet(*config.parameters, permissive=True)
         #        for pfile in  config.parameters:
         #           self.parameters.readParameterFile(pfile ) #, permissive=True)
         #           self.parameters.readStreamFile(pfile ) #, permissive=True)

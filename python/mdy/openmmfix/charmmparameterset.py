@@ -41,7 +41,7 @@ from simtk.openmm.app.internal.charmm.topologyobjects import (
             AtomType, BondType, AngleType, DihedralType, ImproperType, CmapType,
             UreyBradleyType, NoUreyBradley)
 from simtk.openmm.app.internal.charmm.exceptions import CharmmFileError
-from md.openmmfix.element import Element, get_by_symbol
+from mdy.openmmfix.element import Element, get_by_symbol
 import simtk.unit as u
 import warnings
 

@@ -1,4 +1,4 @@
-from md.command import Command
+from mdy.command import Command
 from difflib import get_close_matches
 import re
 import os

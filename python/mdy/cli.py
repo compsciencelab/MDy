@@ -4,9 +4,9 @@ import os
 import argparse
 import re
 import sys
-from md.configuration import Configuration
-from md.command import Command
-from md.simulation import Simulation
+from mdy.configuration import Configuration
+from mdy.command import Command
+from mdy.simulation import Simulation
 from simtk.openmm import Platform
 from htmdx.cli import *
 
