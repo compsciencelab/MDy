@@ -27,11 +27,11 @@ class Simulation:
         self.setup_rigid_bonds(config)
         self.setup_nonbonded(config)
 
-        if (config.forcefield and not config.structure and not config.parameters and not config.parmfile):
+        if config.forcefield and not config.structure and not config.parameters and not config.parmfile:
             self.setup_openmm(config)
-        elif (not config.forcefield and config.parmfile and not config.structure):
+        elif not config.forcefield and config.parmfile and not config.structure:
             self.setup_amber(config)
-        elif (not config.forcefield and config.parameters and config.structure):
+        elif not config.forcefield and config.parameters and config.structure:
             self.setup_charmm(config)
         else:
             raise NameError("Incompatible parameters found. See 'forcefield' for configuration rules")
@@ -53,15 +53,15 @@ class Simulation:
 
 
         # do any requested minimization if this isn't a restart
-        if (config.minimize and not self.restarted):
-            print("\nMinimizing...\n");
+        if config.minimize and not self.restarted:
+            print("\nMinimizing...\n")
             self.simulation.minimizeEnergy()
 
 
 
         # run the simulation
 
-        if (config.run):
+        if config.run:
             try:
                 print("\nRunning for " + str(config.run) + " steps\n")
                 if (self._stdoutlog):
@@ -77,7 +77,7 @@ class Simulation:
                 return
 
         # done - write out terminal output files
-        if (config.outputname):
+        if config.outputname:
             state = self.simulation.context.getState(getPositions=True, getVelocities=True)
             pos = state.getPositions()
             vel = state.getVelocities()
@@ -220,7 +220,7 @@ class Simulation:
                 raise NameError("Restarting from checkpoint file '" + config.restartfile + "' failed")
         else:
             # no checkpoint file exists -- do nothing
-            if (not config.coordinates):
+            if not config.coordinates:
                 raise NameError("'coordinates' must be set")
             else:
                 self.load_coordinates(config.coordinates)
@@ -228,7 +228,7 @@ class Simulation:
 
     def setup_velocities(self, config):
         if not self.restarted:
-            if (config.velocities):
+            if config.velocities:
                 self.load_velocities(config.velocities)
             elif config.temperature is not None:
                 self.simulation.context.setVelocitiesToTemperature(config.temperature * kelvin)
@@ -264,8 +264,8 @@ class Simulation:
         self.simulation.context.setVelocities(vel)
 
     def setup_barostat(self, config):
-        if (config.barostat):
-            if (not config.thermostat):
+        if config.barostat:
+            if not config.thermostat:
                 raise NameError("The barostat requires the thermostat to be enabled")
             if config.barostat_mode == "iso":
                 self.system.addForce(
@@ -281,7 +281,7 @@ class Simulation:
                  MonteCarloMembraneBarostat.XYIsotropic ,
                  MonteCarloMembraneBarostat.ZFree ) )
             else:
-                raise NameError("Unknown barostat mode '" + config.barostat_mode + "'");
+                raise NameError("Unknown barostat mode '" + config.barostat_mode + "'")
 
     def setup_reporters(self, config):
         if not self.restarted:
@@ -292,30 +292,30 @@ class Simulation:
 
         # Set up trajectory writing
 
-        if (config.trajfreq and config.trajfile):
-            if (config.trajfile.endswith(".xtc")):
+        if config.trajfreq and config.trajfile:
+            if config.trajfile.endswith(".xtc"):
 
                 self.simulation.reporters.append(XTCReporter(config.trajfile, config.trajfreq))
-            elif (config.trajfile.endswith(".dcd")):
+            elif config.trajfile.endswith(".dcd"):
                 if self.restarted:
                     raise NameError("Can't append to DCDs when restarting. Use XTC instead")
                 self.simulation.reporters.append(DCDReporter(config.trajfile, config.trajfreq))
             else:
-                raise NameError("trajfile format not supported. Filename must end with .xtc or .dcd");
+                raise NameError("trajfile format not supported. Filename must end with .xtc or .dcd")
 
         # Set up logging to stdout
-        if (config.energyfreq):
+        if config.energyfreq:
             self._stdoutlog = StdoutLogReporter(
                 config.energyfreq, config.run
             )
             self.simulation.reporters.append(self._stdoutlog)
 
         # Set up checkpointing
-        if (config.restartfile):
+        if config.restartfile:
             freq = 25000
             if (config.trajfile):
                 freq = config.trajfreq
-            self.simulation.reporters.append(CheckpointReporter(config.restartfile, freq));
+            self.simulation.reporters.append(CheckpointReporter(config.restartfile, freq))
 
         if config.constraints and config.constraints_decay > 0.:
             self.simulation.reporters.append(
@@ -335,7 +335,7 @@ class Simulation:
         )
 
     def setup_integrator(self, config):
-        if (config.thermostat):
+        if config.thermostat:
             self.integrator = LangevinIntegrator(
                 config.thermostat_temperature * kelvin,
                 config.thermostat_damping / picoseconds,
@@ -351,14 +351,14 @@ class Simulation:
         self.integrator.setConstraintTolerance(1e-5)
 
     def setup_nonbonded(self, config):
-        if (config.pme):
+        if config.pme:
             self.nbmethod = PME
         else:
             self.nbmethod = CutoffPeriodic
 
         self.cutoff = config.cutoff * angstroms
         self.switchdist = config.switchdist * angstroms
-        if (self.switchdist >= self.cutoff):
+        if self.switchdist >= self.cutoff:
             # Turn it off
             self.switchdist = 0.
 
@@ -432,10 +432,10 @@ class Simulation:
         self.rigidwater = False
         self.hmass = None
         self.constraints = None
-        if (self.timestep > 1):
+        if self.timestep > 1:
             self.constraints = HBonds
             self.rigidwater = True
-        if (self.timestep > 2.5):
+        if self.timestep > 2.5:
             self.hmass = 4 * amu
 
     def setup_cell_dimensions(self, config):
@@ -485,7 +485,7 @@ class Simulation:
         # Platform.loadPluginsFromDirectory( plugindir )
         errs = Platform.getPluginLoadFailures()
         if (len(errs)):
-            print("\n  Some errors were found loading plugins. Some platforms may not be available: \n");
+            print("\n  Some errors were found loading plugins. Some platforms may not be available: \n")
             for x in errs:
                 print(x)
             print("")

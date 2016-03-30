@@ -2,24 +2,26 @@ from mdy.command import Command
 from difflib import get_close_matches
 import re
 import os
+
+
 class Configuration:
-    def __init__(self, config=None ):
+    def __init__(self, config=None):
         c = Command.get_default_configuration()
 
-        inputfile=None
-      
-        if( config ):
-           if os.path.isfile( config ):
-              self._basedir = os.path.dirname(( config ))
-              inputfile = config
-           elif os.path.isdir( config ):
-              self._basedir = config #(os.path.abspath( config ))
-              inputfile = os.path.join( self._basedir, "input" )
-#              print(inputfile)
-              if not os.path.isfile(inputfile):
-                 raise NameError( "Input file not found in config directory" )
-           else:
-              raise NameError( "Invalid input. 'config' must be an  input file or a directory containing 'input'" )
+        inputfile = None
+
+        if (config):
+            if os.path.isfile(config):
+                self._basedir = os.path.dirname((config))
+                inputfile = config
+            elif os.path.isdir(config):
+                self._basedir = config  # (os.path.abspath( config ))
+                inputfile = os.path.join(self._basedir, "input")
+                #              print(inputfile)
+                if not os.path.isfile(inputfile):
+                    raise NameError("Input file not found in config directory")
+            else:
+                raise NameError("Invalid input. 'config' must be an  input file or a directory containing 'input'")
 
         for i in c.keys():
             self.__dict__[i] = c[i]
@@ -52,65 +54,65 @@ class Configuration:
             ll = ll + 1
         f.close()
 
-
-    def __setattr__( self, key, value ):
+    def __setattr__(self, key, value):
         if key.startswith("_"):
-            self.__dict__[key]=value
+            self.__dict__[key] = value
             return
 
-        key = key.replace( '_', '-' )
+        key = key.replace('_', '-')
         key = key.lower()
-        key = Command.test_deprecation( key, value )
+        key = Command.test_deprecation(key, value)
         if key:
-            value = Command.validate( key , value, basedir=self._basedir )
+            value = Command.validate(key, value, basedir=self._basedir)
             self.__dict__[key] = value;
 
-    def __getattr__( self, key ):
+    def __getattr__(self, key):
         if key.startswith("_"):
-            self.__dict__[key]=value
+            self.__dict__[key] = value
             return
         try:
-            key = key.replace( '_', '-' );
+            key = key.replace('_', '-');
             key = key.lower()
-            return self.__dict__[ key ]
+            return self.__dict__[key]
         except:
-            errstr= "Command '" + key + "' not found.";
-            match = get_close_matches( key, Command.commands )
+            errstr = "Command '" + key + "' not found.";
+            match = get_close_matches(key, Command.commands)
             if match:
-                errstr = errstr + " Try '"+ match[0] +"'";
-            raise NameError( errstr )
+                errstr = errstr + " Try '" + match[0] + "'";
+            raise NameError(errstr)
 
-    def __repr__( self ):
-        return( self.__str__() )
+    def __repr__(self):
+        return (self.__str__())
 
-    def __str__( self ):
-        s=""
-        for cmd in sorted( self.__dict__ ):
+    def __str__(self):
+        s = ""
+        for cmd in sorted(self.__dict__):
             if not cmd.startswith("_"):
-                s = s +  "%25s %s\n" % ( cmd, str(self.__dict__[cmd]) )
+                s = s + "%25s %s\n" % (cmd, str(self.__dict__[cmd]))
         return s
 
-    def set( self, key, value ):
+    def set(self, key, value):
         self.__setattr__(key, value)
 
     @staticmethod
-    def help( command ):
-        return Command.help( command )
+    def help(command):
+        return Command.help(command)
 
-    def save( self, filename ):
-      """Write out configuration to a file"""
-      with open( filename, "w" ) as fh:
-        for cmd in sorted( self.__dict__ ):
-            if( self.__dict__[cmd] is not None ):
-               print( "%25s %s" % ( cmd, str(self.__dict__[cmd]) ), file=fh ) 
+    def save(self, filename):
+        """Write out configuration to a file"""
+        with open(filename, "w") as fh:
+            for cmd in sorted(self.__dict__):
+                if (self.__dict__[cmd] is not None):
+                    print("%25s %s" % (cmd, str(self.__dict__[cmd])), file=fh)
 
-    def stage( self, directory ):
-        directory=os.path.abspath(directory)
-        os.mkdirs( directory )
-        self.save( os.path.join( directory, "input" ) )
+    def stage(self, directory):
+        directory = os.path.abspath(directory)
+        os.mkdirs(directory)
+        self.save(os.path.join(directory, "input"))
+
 
 if __name__ == "__main__":
-    c = Configuration ()
-    c.set( 'barostat', 'on' )
+    c = Configuration()
+    c.set('barostat', 'on')
     c.barostat = True
     print(c)
